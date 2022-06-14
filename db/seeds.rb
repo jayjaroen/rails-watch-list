@@ -15,7 +15,8 @@ require 'faker'
 List.destroy_all
 Movie.destroy_all
 
-all_movies_list = List.create(name: "All Movies")
+
+
 
 url = 'http://tmdb.lewagon.com/movie/top_rated'
 response = URI.open(url).read
@@ -24,14 +25,14 @@ results.each do |result|
   movie = Movie.new
   movie.title = result['title']
   movie.overview = result['overview']
-  movie.poster_url = result['poster_path']
+  poster = result['poster_path']
+  movie.poster_url = "https://image.tmdb.org/t/p/w500#{poster}"
   movie.rating = result['vote_average']
   p movie
   p movie.save
-  p Bookmark.create(list: all_movies_list, movie: movie, comment: Faker::GreekPhilosophers.quote)
 end
 
-names = ["Friday night", "Must Watch", "Jay's Favories"]
+names = ["Friday night", "Must Watch", "Jay's Favorites"]
 names.each do |name|
   list = List.create(name: name)
   Movie.all.sample(rand(10..20)).each do |movie|
