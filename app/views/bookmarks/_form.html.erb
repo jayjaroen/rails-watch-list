@@ -1,0 +1,9 @@
+<div class="container">
+  <p>Adding a New Movie<p>
+
+  <%= simple_form_for [@list, @bookmark] do |f| %>
+    <%= f.association :movie %>
+    <%= f.input :comment %>
+    <%= f.submit "create", class: 'btn btn-primary'%>
+  <% end %>
+</div>

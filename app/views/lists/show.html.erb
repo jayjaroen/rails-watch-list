@@ -1,0 +1,22 @@
+<div class="container">
+  <h2 style="text-align: center" > <%= @list.name.upcase%></h2>
+    <% @list.bookmarks.each do |bookmark| %>
+      <p>Title:<%= bookmark.movie.title %></p>
+      <p>Overview:<%= bookmark.movie.overview %></p>
+      <p><%= bookmark.movie.poster_url %></p>
+      <p>Rating:<%= bookmark.movie.rating %></p>
+      <p>Comment:<%= bookmark.comment %></p>
+      <%= link_to 'delete', bookmark_path(bookmark), method: :delete, data: { confirm: "Delete this movie from the list?"} %>
+    <% end %>
+  <hr>
+
+
+  <h3 style="text-align:center">⭐️ Add a Movie to <%= @list.name%></h3>
+    <%= simple_form_for([@list, @bookmark]) do |f| %>
+      <%= f.association :movie %>
+      <%= f.input :comment %>
+      <%= f.submit "create", class: 'btn btn-primary'%>
+    <% end %>
+
+<%= link_to 'Back to Movie Lists', lists_path %>
+</div>
