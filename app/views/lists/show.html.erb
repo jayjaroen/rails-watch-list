@@ -1,14 +1,25 @@
 <div class="container">
   <h2 style="text-align: center" > <%= @list.name.upcase%></h2>
-    <% @list.bookmarks.each do |bookmark| %>
-      <p>Title:<%= bookmark.movie.title %></p>
-      <p>Overview:<%= bookmark.movie.overview %></p>
-      <p><%= bookmark.movie.poster_url %></p>
-      <p>Rating:<%= bookmark.movie.rating %></p>
-      <p>Comment:<%= bookmark.comment %></p>
-      <%= link_to 'delete', bookmark_path(bookmark), method: :delete, data: { confirm: "Delete this movie from the list?"} %>
-    <% end %>
+    <div class="row row-cols-1 row-cols-md-3">
+      <% @list.bookmarks.each do |bookmark| %>
+        <div class="col-md-4">
+          <div class="card h-100">
+            <%= image_tag bookmark.movie.poster_url, class: 'card-img-top', width: 300 if bookmark.movie.poster_url%>
+            <div class="card-body">
+              <h5 class="card-title">Title:<%= bookmark.movie.title %></h5>
+              <p class="card-text">
+                  Overview:<%= bookmark.movie.overview %>
+                  Rating:<%= bookmark.movie.rating %>
+                  Comment:<%= bookmark.comment %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <%= link_to 'delete', bookmark_path(bookmark), method: :delete, data: { confirm: "Delete this movie from the list?"} %>
+      <% end %>
+    </div>
   <hr>
+
 
 
   <h3 style="text-align:center">⭐️ Add a Movie to <%= @list.name%></h3>
