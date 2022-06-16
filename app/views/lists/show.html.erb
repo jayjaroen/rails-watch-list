@@ -1,18 +1,18 @@
-<div class="container">
-  <h2 style="text-align: center" > <%= @list.name.upcase%></h2>
+<div class="container pt-5">
+  <h2 style="text-align: center" class="subheader-font"> <%= @list.name.upcase%></h2>
     <div class="row justify-content-center">
       <% @list.bookmarks.each do |bookmark| %>
-        <div class="col-12 col-lg-8">
-          <div class="card h-200">
-            <%= image_tag bookmark.movie.poster_url, class: 'card-img-top', width: '300px', height: '700px' if bookmark.movie.poster_url%>
+        <div class="col-12 col-lg-8" >
+          <div >
+            <%= image_tag bookmark.movie.poster_url, class: 'card-img-top', width: '200px' if bookmark.movie.poster_url%>
             <div class="card-body">
-              <h5 class="card-title"><strong><%= bookmark.movie.title %></strong></h5>
-              <div class="card-text">
+                <h5 class="card-title"><strong><%= bookmark.movie.title %></strong></h5>
+                <div class="card-text">
                   <p><strong>Overview:</strong><%= bookmark.movie.overview%></p>
                   <p><strong>Rating:</strong><%= bookmark.movie.rating %></p>
                   <p><strong>Comment:</strong><em><%= bookmark.comment %></em></p>
-              </div>
-              <p style="text-align :end"><%= link_to 'delete', bookmark_path(bookmark), method: :delete, data: { confirm: "Delete this movie from the list?"} %></p>
+                </div>
+              <p style="text-align :end"><%= link_to 'delete', bookmark_path(bookmark), class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: "Delete this movie from the list?"} %></p>
             </div>
           </div>
         </div>
@@ -21,13 +21,26 @@
   <hr>
 
 
+  <div class="row mt-4 mb-5">
+    <div class="col-12 col-lg-5 mt-2">
+      <h5 style="text-align:center" class="form-font"> <small class="text-muted">🍿 Add a Movie >></small> <%= @list.name%></h5>
+      <%= simple_form_for([@list, @bookmark]) do |f| %>
+        <%= f.association :movie %>
+        <%= f.input :comment %>
+        <%= f.submit "create", class: 'btn btn-secondary btn-sm'%>
+      <% end %>
+    </div>
+    <div class="card-body col-12 col-lg-7">
+      <blockquote class="blockquote mb-0">
+        <p class="font-quote">
+        “What is real? How do you define real? If you're talking about
+        what you can feel, what you can smell, what you can taste and see,
+        then real is simply electrical signals interpreted by your brain.”
+        </p>
+        <footer class="blockquote-footer">Morpheus<cite title="Source Title">The Matrix</cite></footer>
+       </blockquote>
+    </div>
+  </div>
 
-  <h3 style="text-align:center">⭐️ Add a Movie to <%= @list.name%></h3>
-    <%= simple_form_for([@list, @bookmark]) do |f| %>
-      <%= f.association :movie %>
-      <%= f.input :comment %>
-      <%= f.submit "create", class: 'btn btn-primary'%>
-    <% end %>
-
-<%= link_to 'Back to Movie Lists', lists_path %>
+  <p class="mb-3"><%= link_to 'Back to Binge-Watching Lists', lists_path, class: "btn btn-outline-secondary btn-sm" %></p>
 </div>

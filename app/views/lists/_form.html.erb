@@ -1,9 +1,7 @@
 <div class="container">
-  <p>Adding a New Movie List</p>
+  <h5 class="form-font"> 🍿 Your Blinge-Watching List  </h5>
   <%= simple_form_for (@list) do |f| %>
     <%= f.input :name %>
-    <%= f.submit "create", class: 'btn btn-primary'%>
+    <%= f.submit "create", class: 'btn btn-secondary btn-sm' %>
   <% end %>
-
-
 </div>
