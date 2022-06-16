@@ -4,8 +4,7 @@
       <% @list.bookmarks.each do |bookmark| %>
         <div class="col-12 col-lg-8" >
           <div>
-            <img src="<%= bookmark.movie.poster_url%>"  alt="">
-            <%# <%= image_tag bookmark.movie.poster_url, class: 'card-img-top', width: '200px' if bookmark.movie.poster_url%>
+            <%= image_tag "https://image.tmdb.org/t/p/w500#{bookmark.movie.poster_url}", class: 'card-img-top', width: '200px' if bookmark.movie.poster_url%>
             <div class="card-body">
                 <h5 class="card-title"><strong><%= bookmark.movie.title %></strong></h5>
                 <div class="card-text">

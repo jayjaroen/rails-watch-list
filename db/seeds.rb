@@ -25,8 +25,7 @@ results.each do |result|
   movie = Movie.new
   movie.title = result['title']
   movie.overview = result['overview']
-  poster = result['poster_path']
-  movie.poster_url = "https://image.tmdb.org/t/p/w500#{poster}"
+  movie.poster_url = result['poster_path']
   movie.rating = result['vote_average']
   p movie
   p movie.save
